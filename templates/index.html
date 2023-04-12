@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <title>Porównanie zarobków w it w Indiach</title>
+</head>
+<body bgcolor="lightblue">
+<h2><b>Porównanie zarobków na różnych stanowiskach branży it w różnych miastach<br>
+    w Indiach, kwoty zarobku podane są rupiach indyjskich
+    (1<a href="https://pl.wikipedia.org/wiki/Rupia_indyjska" target=_blank">₹</a> ~ 0,0053 PLN)</b></h2>
+<hr>
+    <table border="2" bordercolor="red">
+        <tr>
+            <td width="402" align = "center" valign = "center">
+                <form method="post" action="">
+                    <input type="hidden" name="Operacja" value="Odczyt">
+                    <label>Wybierz miasto z listy: </label>
+                    <select name="miasto">
+                        <option>{{miasto}}</option>
+                        <option>Bangalore</option>
+                        <option>Hyderabad</option>
+                        <option>Mumbai</option>
+                        <option>New Delhi</option>
+                        <option>Pune</option>
+                    </select>
+                    <input type="submit" value="Analizuj dane">
+                </form>
+            </td>
+            <td width="100" align = "center" valign = "center">
+                <form method="post" action="">
+                    <input type="hidden" name="Operacja" value="Czysc">
+                    <input type="submit" value="Wyczyść dane">
+                </form>
+            </td>
+            <td width="100" align = "center" valign = "center">
+                <form method="post" action="">
+                    <input type="hidden" name="Operacja" value="Koniec">
+                    <input type="submit" value="     Koniec     ">
+                </form>
+            </td>
+            <td width="200" align = "center" valign = "center">
+                <a href="https://www.kaggle.com/iamsouravbanerjee/analytics-industry-salaries-2022-india"
+                   target=_blank">Źródło danych</a>
+            </td>
+        </tr>
+    </table>
+    {% if dane_sr %}
+    <h4>Średnie roczne zarobki na każdym z dostępnych stanowisk w {{miasto}}</h4>
+    <table border="2" bordercolor="red">
+        <tr>
+            <th width="200">Lokalizacja</th>
+            <th width="200">Nazwa stanowiska</th>
+            <th width="200">Średnie wynagrodzenie</th>
+        </tr>
+        {% for i in dane_sr %}
+        <tr>
+            <td width="200">{{i[0] }}</td>
+            <td width="200">{{i[1] }}</td>
+            <td width="200" align = "right">{{i[2] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+    {% if dane_mx %}
+    <h4>3 Firmy które płacą najwięcej w {{miasto}}</h4>
+    <table border="2" bordercolor="red">
+        <tr>
+            <th width="200">Nazwa firmy</th>
+            <th width="200">Nazwa stanowiska</th>
+            <th width="200">Najwyższe wynagrodzenie</th>
+            <th width="200"> % > Średniego wynagrodzenia </th>
+        </tr>
+        {% for i in dane_mx %}
+        <tr>
+            <td width="200">{{i[0] }}</td>
+            <td width="200">{{i[1] }}</td>
+            <td width="200" align = "right">{{i[2] }}</td>
+            <td width="200" align = "right">{{i[3] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+     {% endif %}
+     {% if dane_re %}
+     <h4>Rekomendacja - jakie stanowisko w której firmie w {{miasto}} jest najbardziej opłacalne</h4>
+     <table border="2" bordercolor="red">
+        <tr>
+            <th width="200">Nazwa firmy</th>
+            <th width="200">Nazwa stanowiska</th>
+            <th width="200">Najwyższe wynagrodzenie</th>
+        </tr>
+        {% for i in dane_re %}
+        <tr>
+            <td width="200">{{i[0] }}</td>
+            <td width="200">{{i[1] }}</td>
+            <td width="200"  align = "right">{{i[2] }}</td>
+        </tr>
+        {% endfor %}
+     </table>
+     {% endif %}
+</body>
+</html>
